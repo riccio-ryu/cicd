@@ -4,10 +4,10 @@ name: Deploy to Amazon ECS
 on:
   push:
     branches: [ "master" ]
-  pull_request: 
-    branches: [ "master" ]
-    types:
-      - closed
+  # pull_request: 
+  #   branches: [ "master" ]
+  #   types:
+  #     - closed
 
 
 env:
@@ -21,7 +21,7 @@ env:
 
 jobs:
   build:
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -30,10 +30,10 @@ jobs:
     - name: ✅ Checkout branch
       uses: actions/checkout@v3
 
-    # - name: 📀 Install Node.js ${{ matrix.node-version }}
-    #   uses: actions/setup-node@v3
-    #   with:
-    #     node-version: ${{ matrix.node-version }}
+    - name: 📀 Install Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
 
     # - name: ✨ Install pnpm
     #   uses: pnpm/action-setup@v2
