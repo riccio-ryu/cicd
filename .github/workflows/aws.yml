@@ -65,8 +65,8 @@ jobs:
         # pnpm install
         # pnpm build
 
-    - name: 🔨 Build Project
-      run: pnpm build
+    # - name: 🔨 Build Project
+    #   run: pnpm build
   
   deploy:
     needs: build
