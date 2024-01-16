@@ -25,13 +25,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.10.0]
+        node-version: [20]
     steps:
     - name: ✅ Checkout branch
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: 📀 Install Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
