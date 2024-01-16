@@ -25,45 +25,52 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.10.0]
+        node-version: [20]
     steps:
     - name: ✅ Checkout branch
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: 📀 Install Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'npm'
 
-    - name: ✨ Install pnpm
-      uses: pnpm/action-setup@v2
-      id: pnpm-install
-      with:
-        version: 8.14.1
-        run_install: false
+    - name: npm start
+      run: npm ci
 
-    - name: 🚛 Get pnpm cache store directory
-      id: pnpm-cache
-      shell: bash
-      run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+    - name: build
+      run: npm run build
 
-    - name: ⚡️ Setup pnpm cache
-      uses: actions/cache@v3
-      with:
-        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-             ${{ runner.os }}-pnpm-store-
+    # - name: ✨ Install pnpm
+    #   uses: pnpm/action-setup@v2
+    #   id: pnpm-install
+    #   with:
+    #     version: 8.14.1
+    #     run_install: false
 
-      # 아래 install 전에 init 가 필수임 -> 웹페이지에서 init가 없음
-    - name: 📦 Install dependencies
-      run: |
-        pnpm init
-        pnpm install
+    # - name: 🚛 Get pnpm cache store directory
+    #   id: pnpm-cache
+    #   shell: bash
+    #   run: |
+    #       echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-    - name: 🔨 Build Project
-      run: pnpm run build
+    # - name: ⚡️ Setup pnpm cache
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+    #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+    #     restore-keys: |
+    #          ${{ runner.os }}-pnpm-store-
+
+    #   # 아래 install 전에 init 가 필수임 -> 웹페이지에서 init가 없음
+    # - name: 📦 Install dependencies
+    #   run: |
+    #     pnpm init
+    #     pnpm install
+
+    # - name: 🔨 Build Project
+    #   run: pnpm run build
   
   deploy:
     needs: build
