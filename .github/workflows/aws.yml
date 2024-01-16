@@ -15,15 +15,15 @@ env:
   S3_BUCKET_DIR_NAME: test
 
 jobs:
-  # build:
-  #   if: github.event.pull_request.merged == true
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       node-version: [20.10.0]
-  #   steps:
-  #   - name: ✅ Checkout branch
-  #     uses: actions/checkout@v3
+  build:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.10.0]
+    steps:
+    - name: ✅ Checkout branch
+      uses: actions/checkout@v3
 
   #   - name: 📀 Install Node.js ${{ matrix.node-version }}
   #     uses: actions/setup-node@v3
@@ -57,7 +57,7 @@ jobs:
   #   - name: 🔨 Build Project
   #     run: pnpm build
   deploy:
-    # needs: build
+    needs: build
     name: Deploy
     runs-on: ubuntu-latest
     environment: test
