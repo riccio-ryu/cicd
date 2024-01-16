@@ -25,8 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.15.0]
-        # node-version: [20.10.0]
+        node-version: [20.10.0]
     steps:
     - name: ✅ Checkout branch
       uses: actions/checkout@v3
@@ -56,17 +55,15 @@ jobs:
         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
              ${{ runner.os }}-pnpm-store-
-    
-    # - name: Init pnpm
-      # run: pnpm init
 
+      # 아래 install 전에 init 가 필수임 -> 웹페이지에서 init가 없음
     - name: 📦 Install dependencies
       run: |
         pnpm init
         pnpm install
 
-    # - name: 🔨 Build Project
-    #   run: pnpm build
+    - name: 🔨 Build Project
+      run: pnpm run build
   
   deploy:
     needs: build
