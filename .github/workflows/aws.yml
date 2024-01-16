@@ -30,7 +30,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
+      - run: npm install
+      - name: npm init
+        run: npm init -y
       - run: npm test
       - run: npm run build
   # build:
