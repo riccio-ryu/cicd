@@ -56,6 +56,9 @@ jobs:
         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
              ${{ runner.os }}-pnpm-store-
+    
+    - name: Init pnpm
+      run: pnpm init
 
     - name: 📦 Install dependencies
       run: pnpm install
