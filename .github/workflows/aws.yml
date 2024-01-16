@@ -37,11 +37,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: npm start
+    - name: npm install
       run: npm install
+      
+    - name: npm init
+      run: npm init -y
 
     - name: build
-      run: npm run build
+      run: npm run build --if-present
 
     # - name: ✨ Install pnpm
     #   uses: pnpm/action-setup@v2
