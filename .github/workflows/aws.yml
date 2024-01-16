@@ -25,7 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.10.0]
+        node-version: [18.15.0]
+        # node-version: [20.10.0]
     steps:
     - name: ✅ Checkout branch
       uses: actions/checkout@v3
@@ -57,12 +58,13 @@ jobs:
              ${{ runner.os }}-pnpm-store-
 
     - name: 📦 Install dependencies
-      run: | 
-        pnpm install
-        pnpm build
+      run: pnpm install
+        # pnpm install
+        # pnpm build
 
-    # - name: 🔨 Build Project
-      # run: pnpm build
+    - name: 🔨 Build Project
+      run: pnpm build
+  
   deploy:
     needs: build
     name: Deploy
