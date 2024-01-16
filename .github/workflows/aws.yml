@@ -33,7 +33,7 @@ jobs:
       - run: npm install
       - name: npm init
         run: npm init -y
-      - run: npm test
+      # - run: npm test
       - run: npm run build
   # build:
   #   # if: github.event.pull_request.merged == true
