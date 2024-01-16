@@ -57,13 +57,13 @@ jobs:
         restore-keys: |
              ${{ runner.os }}-pnpm-store-
     
-    - name: Init pnpm
-      run: pnpm init
+    # - name: Init pnpm
+      # run: pnpm init
 
     - name: 📦 Install dependencies
-      run: pnpm install
-        # pnpm install
-        # pnpm build
+      run: |
+        pnpm init
+        pnpm install
 
     # - name: 🔨 Build Project
     #   run: pnpm build
