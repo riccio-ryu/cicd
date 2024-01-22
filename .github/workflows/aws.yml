@@ -31,10 +31,13 @@ jobs:
         with:
           node-version: 16
       - run: npm install
+        working-directory: ./test
       - name: npm init
         run: npm init -y
+        working-directory: ./test
       # - run: npm test
       - run: npm run build
+        working-directory: ./test
   # build:
   #   # if: github.event.pull_request.merged == true
   #   runs-on: ubuntu-latest
